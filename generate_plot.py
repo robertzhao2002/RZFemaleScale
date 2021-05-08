@@ -1,5 +1,7 @@
 import numpy as np
 import triangle_utils as tri
+import csv
+import random
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle, RegularPolygon
@@ -91,23 +93,24 @@ def radar_factory(num_vars, frame='circle'):
 
 
 def example_data():
-    data = [
-        ['BAD', 'CUTE', 'HOT'],
-        ('Girl A', [
-            [0.25, 0.60, 0.99]]),
-        ('Girl B', [
-            [0.99, 0.45, 0.50]]),
-        ('Girl C', [
-            [0.35, 0.99, 0.65]]),
-        ('Girl D', [
-            [0.99, 0.99, 0.99]])
-        # ('?', [
-        #     [0.40, 0.99, 0.75]]),
-        # ('??', [
-        #     [0.99, 0.30, 0.95]]),
-        # ('???', [
-        #     [0.75, 0.25, 0.95]])
-    ]
+    raw_data = []
+    data = [['BAD', 'CUTE', 'HOT']]
+    file = open("CHICKS.csv")
+    reader = csv.reader(file, delimiter=',')
+    num_lines= len(list(reader))
+
+    #Reset buffer
+    file = open("CHICKS.csv")
+    reader = csv.reader(file, delimiter=',')
+    rows_to_display = list(range(num_lines))
+    random.shuffle(rows_to_display)
+    rows_to_display = rows_to_display[0:4]
+    reader_list = list(reader)
+    for i in rows_to_display:
+        raw_data.append(reader_list[i])
+    for j in raw_data:
+        to_add = (j[0], [[float(j[1]), float(j[2]), float(j[3])]])
+        data.append(to_add)
     return data
 
 if __name__ == '__main__':
@@ -138,7 +141,7 @@ if __name__ == '__main__':
         for d, color in zip(case_data, colors):
             ax.plot(theta, d, color=color)
             ax.fill(theta, d, facecolor=color, alpha=0.25)
-            ax.set_rgrids([0.2, 0.4, 0.6, 0.8])
+            ax.set_rgrids([0.2, 0.4, 0.6, 0.8, 1])
         ax.set_varlabels(spoke_labels)
 
     # add legend relative to top-left plot
