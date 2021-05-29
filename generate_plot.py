@@ -1,36 +1,15 @@
-import numpy as np
 import triangle_utils as tri
-import csv
-import random
 import radar_utils as RU
-
+import retrieve_data as data_retriever
 import matplotlib.pyplot as plt
 
-def example_data():
-    raw_data = []
-    data = [['BAD', 'CUTE', 'HOT']]
-    file = open("CHICKS.csv")
-    reader = csv.reader(file, delimiter=',')
-    reader_list = list(reader)[1:]
-    print(reader_list)
-    num_lines= len(reader_list)
-
-    rows_to_display = list(range(num_lines))
-    random.shuffle(rows_to_display)
-    rows_to_display = rows_to_display[0:4]
-    
-    for i in rows_to_display:
-        raw_data.append(reader_list[i])
-    for j in raw_data:
-        to_add = (j[0], [[float(j[1]), float(j[2]), float(j[3])]])
-        data.append(to_add)
-    return data
+SUBJECTS_TO_SHOW = 4
 
 if __name__ == '__main__':
     N = 3
     theta = RU.radar_factory(N, frame='circle')
 
-    data = example_data()
+    data = data_retriever.csv_to_plot(SUBJECTS_TO_SHOW)
     spoke_labels = data.pop(0)
 
     for i in range(0, len(data)):
