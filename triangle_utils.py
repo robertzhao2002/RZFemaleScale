@@ -7,7 +7,7 @@ def triArea(a,b,c):
     area = math.sqrt(s*(s-a)*(s-b)*(s-c))
     return area
     
-#Calculates the sidelength of the radar shape based on the 2 other sides
+#Calculates the sidelength of the radar shape based on the 2 other sides using the Law of Cosines.
 def sideLength(r1, r2):
     side_squared = r1**2 + r2**2 - 2*r1*r2*math.cos(2*math.pi/3)
     return math.sqrt(side_squared)
