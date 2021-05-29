@@ -1,5 +1,8 @@
 # RZFemaleScale
 
+### generate_plot.py
+This is a Python 3 module that is responsible for displaying the randomized csv data into a radar plot.
+
 ### radar_utils.py
 This is a Python 3 module that contains helper functions to generate the radar plot using MatPlotLib. It uses polar mathematics to ensure that the geometry of the graph is clean.
 
